@@ -18,8 +18,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .wrap{max-width:1100px;margin:0 auto;padding:16px}
 h1{font-size:20px;margin:0 0 4px}
 .sub{color:var(--mute);font-size:13px;margin:0 0 12px}
-.btn{display:inline-block;margin:0 0 14px;padding:9px 16px;border-radius:8px;background:var(--p2);color:#fff;font-size:14px;font-weight:700;text-decoration:none}
-.btn:hover{filter:brightness(1.08)}
+.btn{display:inline-flex;align-items:center;align-self:stretch;margin:0;padding:8px 16px;border-radius:8px;background:#d62828;color:#fff;font-size:14px;font-weight:700;text-decoration:none}
+.btn:hover{filter:brightness(1.1)}
 .stats{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:12px;color:var(--mute)}
 .stat b{display:block;font-size:17px;color:var(--ink)}
@@ -47,7 +47,6 @@ tbody tr{cursor:pointer}
 <div class="wrap">
 <h1>RV Trip Map: 49 Landmarks</h1>
 <p class="sub">San Jose, April 1 to November 20, 2027. Lines are straight hops between stops, not driving routes.</p>
-<a class="btn" id="detailBtn" href="https://docs.google.com/spreadsheets/d/10iC8_54TrXwqunvxzZ5ABUXlGmcxvY36/edit?usp=sharing" target="_blank" rel="noopener">Detailed Itinerary</a>
 <div class="stats" id="stats"></div>
 <div class="legend" id="legend"></div>
 <div class="mapbox" id="mapbox">
@@ -103,7 +102,7 @@ const lg=document.getElementById('legend');
 PH.forEach((ph,i)=>{const s=document.createElement('span');s.innerHTML=`<i style="background:var(${ph[1]})"></i>${ph[0]}`;
  s.onclick=()=>{const off=s.classList.toggle('off');segs[i].style.display=off?'none':'';pts.forEach((p,j)=>{if(p.ph===i&&p.leg>0&&p.type!=='Home')mk[j].style.display=off?'none':''})};lg.appendChild(s)});
 // stats
-document.getElementById('stats').innerHTML=[['Return home',tot.ret],['Nights on the road',tot.nights],['Route miles',tot.miles.toLocaleString()],['Stops and transits',pts.length-2]].map(a=>`<div class="stat">${a[0]}<b>${a[1]}</b></div>`).join('');
+document.getElementById('stats').innerHTML=[['Return home',tot.ret],['Nights on the road',tot.nights],['Route miles',tot.miles.toLocaleString()],['Stops and transits',pts.length-2]].map(a=>`<div class="stat">${a[0]}<b>${a[1]}</b></div>`).join('')+'<a class="btn" id="detailBtn" href="https://docs.google.com/spreadsheets/d/10iC8_54TrXwqunvxzZ5ABUXlGmcxvY36/edit?usp=sharing" target="_blank" rel="noopener">Detailed Itinerary</a>';
 // table
 const tb=document.getElementById('rows');
 pts.forEach((p,i)=>{if(p.leg===0)return;const tr=document.createElement('tr');tr.dataset.i=i;
